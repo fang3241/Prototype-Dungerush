@@ -280,8 +280,8 @@ public class Generator2D : MonoBehaviour {
             //Debug.Log(": " + randSpawn);
             randSpawn--;
             if(randSpawn == 0){
-                player.position = new Vector3(pos.x * scaling, 1.2f, pos.y * scaling);
-                Debug.Log(player.position);
+                player.position = new Vector3((pos.x + 0.5f) * scaling, 1.2f, (pos.y + 0.5f) * scaling);
+                //Debug.Log(player.position);
             }
             if(pos.x > 0){
                 if(grid[new Vector2Int((int)pos.x - 1, (int)pos.y)] == CellType.Room || grid[new Vector2Int((int)pos.x - 1, (int)pos.y)] == CellType.RDoor){

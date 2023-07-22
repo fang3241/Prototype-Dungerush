@@ -12,6 +12,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private float turnSmoothVelocity;
 
+    float dodgeCooldown;
+
+    [SerializeField]
+    Transform Chara;
+
+    
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -35,6 +42,11 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(movedir.normalized * speed * Time.deltaTime);
         }
 
+        //
+        
+
     }
+
+    
 
 }
