@@ -12,6 +12,13 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private float turnSmoothVelocity;
 
+    float dodgeCooldown;
+
+    [SerializeField]
+    Transform Chara;
+
+    
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -24,7 +31,7 @@ public class ThirdPersonMovement : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
 
         Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;
-        Debug.Log(dir);
+        //Debug.Log(dir);
         if(dir.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -35,6 +42,11 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(movedir.normalized * speed * Time.deltaTime);
         }
 
+        //
+        
+
     }
+
+    
 
 }
