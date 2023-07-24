@@ -26,6 +26,7 @@ public class Combat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Sword.GetComponentInChildren<Collider>().enabled = false;
         
     }
 
@@ -105,17 +106,27 @@ public class Combat : MonoBehaviour
     }
 
     IEnumerator combo1(){
+        //Edit dikit
+        Sword.GetComponentInChildren<Collider>().enabled = true;
+        
         float startTime = Time.time;
         StartCoroutine(Anima(Sword, new Vector3(0f, 0f, 0f), new Vector3(-10f, 40f, 0f), 0.2f));
         //wait
         while(Time.time < startTime + 0.2f){
             yield return null;
         }
+        
         StartCoroutine(Anima(Sword, new Vector3(-10f, 40f, 0f), new Vector3(25f, -150f, -115f), 0.3f));
         //wait
         while(Time.time < startTime + 0.2f + 0.5f){
             yield return null;
         }
+
+
+        //Edit dikit biar hit nya cuman 1x
+        Sword.GetComponentInChildren<Collider>().enabled = false;
+        
+
         StartCoroutine(Anima(Sword, new Vector3(25f, -150f, -115f), new Vector3(0f, 0f, 0f), 0.2f));
     }
 

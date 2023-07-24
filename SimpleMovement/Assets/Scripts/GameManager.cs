@@ -47,9 +47,10 @@ public class GameManager : MonoBehaviour
         money = 500;
     }
 
-    public void AddMoney()
+    public void AddMoney(int g)
     {
-        money += 100;
-        FindAnyObjectByType<ShopController>().updateShopPrice();
+        money += g;
+        //dimatiin dulu karena fitur shop nanti aja
+        //FindAnyObjectByType<ShopController>().updateShopPrice();
     }
 }

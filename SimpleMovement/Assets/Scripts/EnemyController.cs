@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public int hp;
     public GameObject player;
 
     public float attackRange;//attack range diisi manual, ngepasiin sendiri sama hitbox pedangnya => max 3.25
@@ -12,6 +13,8 @@ public class EnemyController : MonoBehaviour
     private Collider EnemyRange;
 
     public bool isPlayerDetected;
+
+    public int goldDrop;
 
     private void Start()
     {
@@ -50,6 +53,24 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log(other);
         }
+    }
+
+    public void Hit(int dmg)
+    {
+        hp -= dmg;
+
+        if(hp <= 0)
+        {
+            Dead();
+        }
+    }
+
+    public void Dead()
+    {
+        //add gold
+        GameManager.instance.AddMoney(goldDrop);
+        //remove GO
+        Destroy(this.gameObject);
     }
 
 }

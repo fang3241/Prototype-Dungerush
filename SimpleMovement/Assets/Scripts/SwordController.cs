@@ -17,6 +17,7 @@ public class SwordController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            other.GetComponent<EnemyController>().Hit(1);//nanti bikin weapon stats buat masukkin damage nya, sementara 1 dulu
             Debug.Log("Enemy hit");
         }
     }
