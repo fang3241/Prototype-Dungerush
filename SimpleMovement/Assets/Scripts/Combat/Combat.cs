@@ -17,6 +17,7 @@ public class Combat : MonoBehaviour
     [SerializeField]
     Transform Sword;
 
+    public PlayerController player;
     public CharacterController controller;
     public float dashSpeed;
     public float dashTime;
@@ -26,6 +27,7 @@ public class Combat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GetComponent<PlayerController>();
         Sword.GetComponentInChildren<Collider>().enabled = false;
         
     }
@@ -52,6 +54,8 @@ public class Combat : MonoBehaviour
             //Debug.Log("Pressed right-click.");
             if(isDef >= isDefMax){
                 isDef = isDefMax;
+
+                player.shield.GetComponent<BoxCollider>().enabled = true;
                 //baru bisa ngeblock kalo isDef udah penuh
             }
             else if(isDef < isDefMax){
@@ -66,6 +70,9 @@ public class Combat : MonoBehaviour
             else{
                 isDef = 0f;
             }
+            player.shield.GetComponent<BoxCollider>().enabled = false;
+            //player.isShieldUp = false;
+            //player.shield.isHit = false;
         }
 
         //

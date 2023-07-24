@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
         if(other == player.GetComponent<Collider>())
         {
             isPlayerDetected = true;
-            Debug.Log(other);
+            //Debug.Log(other);
         }
     }
 

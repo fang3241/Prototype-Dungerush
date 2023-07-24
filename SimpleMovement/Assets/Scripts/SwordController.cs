@@ -6,6 +6,12 @@ public class SwordController : MonoBehaviour
 {
     public Collider colliderSelf;
 
+    public bool isAttackBounced;
+
+    private void Start()
+    {
+        isAttackBounced = false;
+    }
     /*
      * 1. dobel hit karena dia 2x masuk ke musuh, pas hit pertama, sama pas kembali ke posisi semula 
      * 2. kalo misal posisi pedang di depan, dan bisa collide sama musuh, bisa accidental hit
@@ -24,14 +30,28 @@ public class SwordController : MonoBehaviour
             Debug.Log("Enemy hit");
            
         }
+        
 
-        //Debug.Log(other);
 
         if (other != colliderSelf && other.CompareTag("Player"))
         {
-            int dmg = colliderSelf.GetComponent<EnemyController>().damage;
-            other.GetComponent<PlayerController>().Hit(dmg);
-            Debug.Log("Player hit");
+            Debug.Log("Player Hit");
+            if (!isAttackBounced)
+            {
+                int dmg = colliderSelf.GetComponent<EnemyController>().damage;
+                other.GetComponent<PlayerController>().Hit(dmg);
+                Debug.Log("Player damaged " + colliderSelf.name);
+            }
+            else
+            {
+                Debug.Log("Player Shielded");
+                isAttackBounced = false;
+            }
+            
+            
+            
+
+            
         }
 
     }

@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public ShieldController shield;
     public int playerHP;
     public int playerDamage;
+
+    //public bool isShieldUp;
+
+    private void Start()
+    {
+        shield.GetComponent<BoxCollider>().enabled = false;
+        //isShieldUp = false;
+    }
 
     public void Hit(int dmg)
     {
