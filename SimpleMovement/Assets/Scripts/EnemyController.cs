@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int hp;
+    public EnemyCombat enemyCombat;
     public GameObject player;
+    public int hp;
+    public int damage;
+    public float attInterval;
 
-    public float attackRange;//attack range diisi manual, ngepasiin sendiri sama hitbox pedangnya => max 3.25
-
-    public float rotationSpeed;
+    public float attackRange;//attack range diisi manual, ngepasiin sendiri sama hitbox pedangnya => max 2.88
+    
     private Collider EnemyRange;
 
     public bool isPlayerDetected;
@@ -30,8 +32,9 @@ public class EnemyController : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        if(distance < attackRange)
+        if(distance < attackRange && !enemyCombat.isAttack)
         {
+            StartCoroutine(AttackTimer(attInterval));
             //Debug.Log("Attack");
         }
     }
@@ -40,17 +43,15 @@ public class EnemyController : MonoBehaviour
     {
         //sementara gini, bisa diganti sekalian nggerakkin enemy nya
         transform.LookAt(player.transform);
-
-        Debug.Log("looking at player");
-        //Vector3 dir = player.transform.position - transform.position;
-        //Quaternion toRotation = Quaternion.LookRotation(transform.forward, dir);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        
+      
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other == player.GetComponent<Collider>())
         {
+            isPlayerDetected = true;
             Debug.Log(other);
         }
     }
@@ -73,4 +74,10 @@ public class EnemyController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public IEnumerator AttackTimer(float time)
+    {
+        //yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time);
+        enemyCombat.Attack();
+    }
 }
