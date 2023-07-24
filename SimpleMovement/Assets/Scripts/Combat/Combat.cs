@@ -51,11 +51,13 @@ public class Combat : MonoBehaviour
         }
 
         if (Input.GetMouseButton(1)){
-            //Debug.Log("Pressed right-click.");
+            Debug.Log("Pressed right-click.");
+            if(isDef == isDefMax){
+                Debug.Log("fullDef");
+                player.shield.GetComponent<BoxCollider>().enabled = true;
+            }
             if(isDef >= isDefMax){
                 isDef = isDefMax;
-
-                player.shield.GetComponent<BoxCollider>().enabled = true;
                 //baru bisa ngeblock kalo isDef udah penuh
             }
             else if(isDef < isDefMax){
@@ -64,6 +66,7 @@ public class Combat : MonoBehaviour
         }
         else{
             //Debug.Log("Released right-click.");
+            //Debug.Log(isDef);
             if(isDef > 0.0f){
                 isDef -= 1.0f * Time.deltaTime;
             }

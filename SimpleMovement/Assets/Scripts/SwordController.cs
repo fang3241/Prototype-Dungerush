@@ -44,8 +44,13 @@ public class SwordController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Player Shielded");
+                Debug.Log("Player Shielded " + transform.parent.parent.gameObject);
                 isAttackBounced = false;
+                
+                //kasi tau ke enemy tsb bahwa keblock
+                EnemyCombat enemyCombat = transform.parent.parent.gameObject.GetComponent<EnemyCombat>();
+                enemyCombat.blocked = true;
+                //animasi enemy tsb gagal atk
             }
             
             
