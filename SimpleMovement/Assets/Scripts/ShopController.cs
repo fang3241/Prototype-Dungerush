@@ -54,11 +54,13 @@ public class ShopController : MonoBehaviour
 
     public void updateShopPrice()
     {
+        Debug.Log("Updet");
         playerMoney.text = GameManager.instance.money.ToString();
         int i = 0;
         foreach(TextMeshProUGUI itemLevel in itemLevels)
         {
             itemLevel.text = "Lv " + (GameManager.instance.playerItemLevel[i] + 1);
+            Debug.Log("Lv " + (GameManager.instance.playerItemLevel[i] + 1));
             i++;
         }
 
