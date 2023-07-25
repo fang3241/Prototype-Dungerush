@@ -23,12 +23,20 @@ public class Combat : MonoBehaviour
     public float dashTime;
     public float dashCD;
     public float deamult;
-    bool isDash = false;
+    public bool isDash = false;
+
+    public float attInterval;
+    public bool isAttCD;
+
+    public bool isShieldUp;
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<PlayerController>();
         Sword.GetComponentInChildren<Collider>().enabled = false;
+
+        isAttCD = false;
+        isShieldUp = false;
         
     }
 
@@ -41,19 +49,26 @@ public class Combat : MonoBehaviour
 
         Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0) && !player.isOnShop){
             Debug.Log("Pressed left-click.");
-            StartCoroutine(combo1());
+
+            if (!isAttCD && !isShieldUp)
+            {
+                StartCoroutine(CooldownForAttack());
+            }
         }
 
-        if (Input.GetMouseButtonUp(0)){
+        if (Input.GetMouseButtonUp(0) && !player.isOnShop)
+        {
             Debug.Log("Released left-click.");
         }
 
-        if (Input.GetMouseButton(1)){
+        if (Input.GetMouseButton(1) && !player.isOnShop)
+        {
             Debug.Log("Pressed right-click.");
             if(isDef == isDefMax){
                 Debug.Log("fullDef");
+                isShieldUp = true;
                 player.shield.GetComponent<BoxCollider>().enabled = true;
             }
             if(isDef >= isDefMax){
@@ -61,7 +76,10 @@ public class Combat : MonoBehaviour
                 //baru bisa ngeblock kalo isDef udah penuh
             }
             else if(isDef < isDefMax){
-                isDef += 1.0f * Time.deltaTime;
+                if (isAttCD == false)
+                {
+                    isDef += 1.0f * Time.deltaTime;
+                }
             }
         }
         else{
@@ -73,13 +91,14 @@ public class Combat : MonoBehaviour
             else{
                 isDef = 0f;
             }
+            isShieldUp = false;
             player.shield.GetComponent<BoxCollider>().enabled = false;
             //player.isShieldUp = false;
             //player.shield.isHit = false;
         }
 
         //
-        if(Input.GetKeyDown(KeyCode.Space) && isDash == false){
+        if(Input.GetKeyDown(KeyCode.Space) && isDash == false && !isShieldUp && !isAttCD){
             //Debug.Log("SPACE DOWN");
             isDash = true;
             //cek direction player
@@ -93,6 +112,16 @@ public class Combat : MonoBehaviour
 
         Shield.rotation = Quaternion.Euler(0, Chara.eulerAngles.y + ((isDef/isDefMax) * 90), 0);
 
+    }
+
+    //0 = att
+    //1 = shield
+    public IEnumerator CooldownForAttack()
+    {
+        isAttCD = true;
+        StartCoroutine(combo1());
+        yield return new WaitForSeconds(attInterval);
+        isAttCD = false;
     }
 
     IEnumerator Dash(Vector3 movedir){

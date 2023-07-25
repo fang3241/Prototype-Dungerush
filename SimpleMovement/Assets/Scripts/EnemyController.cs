@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        player = GameManager.instance.levelController.player;
         isPlayerDetected = false;
     }
 

@@ -15,16 +15,14 @@ public class ShopController : MonoBehaviour
     public TextMeshProUGUI[] itemCosts;
 
     public TextMeshProUGUI playerMoney;
-
-
-
+    
     public bool isShopOpened;
 
     // Start is called before the first frame update
     void Start()
     {
         isShopOpened = false;
-        shopPanel.SetActive(isShopOpened);
+        //shopPanel.SetActive(isShopOpened);
     }
 
     // Update is called once per frame
@@ -38,9 +36,20 @@ public class ShopController : MonoBehaviour
 
     public void openShopMenu()
     {
+        if (!isShopOpened)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         isShopOpened = !isShopOpened;
         updateShopPrice();
         shopPanel.SetActive(isShopOpened);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isOnShop = isShopOpened;
     }
 
     public void updateShopPrice()

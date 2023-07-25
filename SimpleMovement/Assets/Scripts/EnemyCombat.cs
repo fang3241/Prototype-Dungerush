@@ -95,7 +95,7 @@ public class EnemyCombat : MonoBehaviour
                 }
             }
             obj.rotation = Quaternion.Euler(((to.x - from.x) * perc) + from.x, ((to.y - from.y) * perc) + from.y + Chara.eulerAngles.y, ((to.z - from.z) * perc) + from.z);
-            Debug.Log("perer" + perc);
+            //Debug.Log("perer" + perc);
             yield return null;
         }
     }

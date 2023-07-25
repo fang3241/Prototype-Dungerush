@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public LevelController levelController;
     //harga barang
     //0 = sword
     //1 = shield
@@ -46,6 +47,13 @@ public class GameManager : MonoBehaviour
 
         money = 500;
     }
+
+    public int CheckPotion()
+    {
+        return playerItemLevel[2];
+    }
+
+    
 
     public void AddMoney(int g)
     {
