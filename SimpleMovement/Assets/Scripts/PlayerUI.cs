@@ -14,6 +14,11 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI gold;
 
     public int maxHP;
+    
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<PlayerController>();
+    }
 
     private void Update()
     {
