@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCombat: {fileID: 4689244218006969159}
-  player: {fileID: 0}
+  player: {fileID: 8362116912075484, guid: f72e3817526ea7240b22f39ae679b5f7, type: 3}
   hp: 3
   damage: 1
   attInterval: 0.5
