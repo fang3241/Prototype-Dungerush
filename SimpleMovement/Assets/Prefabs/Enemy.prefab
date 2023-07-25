@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCombat: {fileID: 4689244218006969159}
-  player: {fileID: 0}
+  player: {fileID: 8362116912075484, guid: f72e3817526ea7240b22f39ae679b5f7, type: 3}
   hp: 3
   damage: 1
   attInterval: 0.5
@@ -105,6 +105,7 @@ MonoBehaviour:
   Shield: {fileID: 4689244218724294961}
   Sword: {fileID: 4689244218811013912}
   isAttack: 0
+  blocked: 0
 --- !u!1 &4689244218176272632
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderSelf: {fileID: 4689244218006969161}
+  isAttackBounced: 0
 --- !u!1 &4689244219793747111
 GameObject:
   m_ObjectHideFlags: 0

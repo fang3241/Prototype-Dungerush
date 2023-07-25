@@ -16,6 +16,10 @@ public class Combat : MonoBehaviour
     Transform Shield;
     [SerializeField]
     Transform Sword;
+    //[SerializeField]
+    //int x;
+    //[SerializeField]
+    //int y;
 
     public PlayerController player;
     public CharacterController controller;
@@ -43,6 +47,10 @@ public class Combat : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)){
             Debug.Log("Pressed left-click.");
+            //
+            //var pos = new Vector2Int(x, y);
+            //Debug.Log(Generator2D.grid[pos]);         //detect grid
+            //
             StartCoroutine(combo1());
         }
 

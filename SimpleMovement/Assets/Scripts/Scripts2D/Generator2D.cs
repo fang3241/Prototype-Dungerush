@@ -5,7 +5,8 @@ using Random = UnityEngine.Random;
 using Graphs;
 
 public class Generator2D : MonoBehaviour {
-    enum CellType {
+    [SerializeField]
+    public enum CellType {
         None,
         Room,
         Hallway,
@@ -16,8 +17,8 @@ public class Generator2D : MonoBehaviour {
     class Room {
         public RectInt bounds;
 
-        public Room(Vector2Int location, Vector2Int size) {
-            bounds = new RectInt(location, size);
+        public Room(Vector2Int location, Vector2Int losize) {
+            bounds = new RectInt(location, losize);
         }
 
         public static bool Intersect(Room a, Room b) {
@@ -27,7 +28,9 @@ public class Generator2D : MonoBehaviour {
     }
 
     [SerializeField]
-    Vector2Int size;
+    public static Vector2Int size;
+    [SerializeField]
+    Vector2Int losize;//40 x 40
     [SerializeField]
     int roomCount;
     [SerializeField]
@@ -52,8 +55,15 @@ public class Generator2D : MonoBehaviour {
     float scaling;
     [SerializeField]
     Transform player;
+    [SerializeField]
+    GameObject enemy;
+    [SerializeField]
+    int enemyCount;
+    [SerializeField]
+    Vector2Int tar;
 
-    Grid2D<CellType> grid;
+    [SerializeField]
+    public static Grid2D<Generator2D.CellType> grid;
     List<Room> rooms;
     Delaunay2D delaunay;
     HashSet<Prim.Edge> selectedEdges;
@@ -63,7 +73,12 @@ public class Generator2D : MonoBehaviour {
     }
 
     void Generate() {
-        grid = new Grid2D<CellType>(size, Vector2Int.zero);
+        //Debug.Log("cct" + Generator2D.CellType);
+        Generator2D.grid = new Grid2D<CellType>(losize, Vector2Int.zero);
+        Debug.Log("size" + losize);
+        Generator2D.size = losize;
+        Debug.Log("Gz" + Generator2D.size);
+        Debug.Log("ggs"+ Generator2D.grid[0,0]);
         rooms = new List<Room>();
 
         PlaceRooms();
@@ -72,13 +87,14 @@ public class Generator2D : MonoBehaviour {
         PathfindHallways();
         drawFloor();
         drawWall();
+        generateEnemy(enemyCount);
     }
 
     void PlaceRooms() {
         for (int i = 0; i < roomCount; i++) {
             Vector2Int location = new Vector2Int(
-                Random.Range(0, size.x),
-                Random.Range(0, size.y)
+                Random.Range(0, losize.x),
+                Random.Range(0, losize.y)
             );
 
             Vector2Int roomSize = new Vector2Int(
@@ -97,15 +113,18 @@ public class Generator2D : MonoBehaviour {
                 }
             }
 
-            if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= size.x
-                || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= size.y) {
+            if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= losize.x
+                || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= losize.y) {
                 add = false;
             }
             if (add) {
                 rooms.Add(newRoom);
 
                 foreach (var pos in newRoom.bounds.allPositionsWithin) {
-                    grid[pos] = CellType.Room;
+                    Debug.Log(pos);
+                    Debug.Log(Generator2D.grid.Size);
+                    Debug.Log(Generator2D.grid[0,0]);
+                    Generator2D.grid[pos] = CellType.Room;
                 }
             }
         }
@@ -142,7 +161,7 @@ public class Generator2D : MonoBehaviour {
     }
 
     void PathfindHallways() {
-        DungeonPathfinder2D aStar = new DungeonPathfinder2D(size);
+        DungeonPathfinder2D aStar = new DungeonPathfinder2D(losize);
 
         foreach (var edge in selectedEdges) {
             var startRoom = (edge.U as Vertex<Room>).Item;
@@ -490,5 +509,26 @@ public class Generator2D : MonoBehaviour {
         GameObject go = Instantiate(cubePrefab, new Vector3(location.x * scaling, 0, location.y * scaling), Quaternion.identity, wallParent);
         go.GetComponent<Transform>().localScale = new Vector3(size.x * scaling, scaling, size.y * scaling);
         go.GetComponent<MeshRenderer>().material = material;
+    }
+
+    //
+    void generateEnemy(int count){
+        for(int i = count; i > 0; i--){
+            //pick random location
+            tar = new Vector2Int(Random.Range(0,Generator2D.size.x), Random.Range(0,Generator2D.size.y));
+            //check if not null
+            if(Generator2D.grid[tar] != CellType.None){
+                Debug.Log("spawn enemy at " + Generator2D.grid[tar]);
+                GameObject enem = Instantiate(enemy, new Vector3((tar.x + Random.Range(0f, 1f)) * scaling, 1.2f, (tar.y + Random.Range(0f, 1f)) * scaling), Quaternion.identity);
+                enem.GetComponent<Transform>().localScale = new Vector3(1.2f, 1.2f, 1.2f); 
+                //enem.GetComponent<MeshRenderer>().material = purpleMaterial;
+            }
+            else{
+                //if null repeat loop 
+                i++;
+            }
+            //spawn enemy, count -= 1
+            //repeat until count = 0;
+        }
     }
 }
