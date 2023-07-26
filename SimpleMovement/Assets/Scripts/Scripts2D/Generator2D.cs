@@ -40,7 +40,11 @@ public class Generator2D : MonoBehaviour {
     [SerializeField]
     GameObject cubePrefab;
     [SerializeField]
-    Material redMaterial;
+    GameObject floor;
+    [SerializeField]
+    GameObject wall;
+    [SerializeField]
+    Material floorMaterial;
     [SerializeField]
     Material blueMaterial;
     [SerializeField]
@@ -282,8 +286,12 @@ public class Generator2D : MonoBehaviour {
 
     void PlaceCube(Vector2Int location, Vector2Int size, Material material) {
         GameObject go = Instantiate(cubePrefab, new Vector3(location.x * scaling, 0, location.y * scaling), Quaternion.identity);
-        go.GetComponent<Transform>().localScale = new Vector3(size.x * scaling, 0.1f, size.y * scaling);
+        go.GetComponent<Transform>().localScale = new Vector3(2.5f, 0.1f, 2.5f);
         go.GetComponent<MeshRenderer>().material = material;
+        GameObject roof = Instantiate(cubePrefab, new Vector3(location.x * scaling, scaling, location.y * scaling), Quaternion.identity);
+        roof.GetComponent<Transform>().localScale = new Vector3(2.5f, 0.1f, 2.5f);
+        roof.GetComponent<Transform>().Rotate(180f, 0f, 0f);
+        roof.GetComponent<MeshRenderer>().material = material;
     }
 
     void cekArch(char gridType, Vector2Int pos) {
@@ -299,7 +307,7 @@ public class Generator2D : MonoBehaviour {
             //Debug.Log(": " + randSpawn);
             randSpawn--;
             if(randSpawn == 0){
-                player.position = new Vector3((pos.x + 0.5f) * scaling, 1.2f, (pos.y + 0.5f) * scaling);
+                player.position = new Vector3(pos.x * scaling, 0f, pos.y  * scaling);
                 //Debug.Log(player.position);
             }
             if(pos.x > 0){
@@ -475,40 +483,40 @@ public class Generator2D : MonoBehaviour {
     }
     
     void PlaceRoom(Vector2Int location, Vector2Int size) {
-        PlaceCube(location, size, redMaterial);
+        PlaceCube(location, size, floorMaterial);
     }
     void PlaceHallway(Vector2Int location) {
-        PlaceCube(location, new Vector2Int(1, 1), blueMaterial);
+        PlaceCube(location, new Vector2Int(1, 1), floorMaterial);
     }
     void PlaceRDoor(Vector2Int location) {
-        PlaceCube(location, new Vector2Int(1, 1), greenMaterial);
+        PlaceCube(location, new Vector2Int(1, 1), floorMaterial);
     }
     void PlaceHDoor(Vector2Int location) {
-        PlaceCube(location, new Vector2Int(1, 1), yellowMaterial);
+        PlaceCube(location, new Vector2Int(1, 1), floorMaterial);
     }
     void PlaceRoomz(Vector2Int location) {
-        PlaceCube(location, new Vector2Int(1, 1), redMaterial);
+        PlaceCube(location, new Vector2Int(1, 1), floorMaterial);
     }
 
     void placeWallR(Vector2Int location, Vector2 size, Material material){
-        GameObject go = Instantiate(cubePrefab, new Vector3(((float)location.x + 0.9f) * scaling, 0, location.y * scaling), Quaternion.identity, wallParent);
-        go.GetComponent<Transform>().localScale = new Vector3(size.x * scaling, scaling, size.y * scaling);
-        go.GetComponent<MeshRenderer>().material = material;
+        GameObject go = Instantiate(wall, new Vector3((location.x + 0.5f) * scaling, 0, location.y * scaling), Quaternion.identity, wallParent);
+        go.GetComponent<Transform>().localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        go.GetComponent<Transform>().Rotate(0f, -90f, 0f);
+        //go.GetComponent<MeshRenderer>().material = material;
     }
     void placeWallL(Vector2Int location, Vector2 size, Material material){
-        GameObject go = Instantiate(cubePrefab, new Vector3(location.x * scaling, 0, location.y * scaling), Quaternion.identity, wallParent);
-        go.GetComponent<Transform>().localScale = new Vector3(size.x * scaling, scaling, size.y * scaling);
-        go.GetComponent<MeshRenderer>().material = material;
+        GameObject go = Instantiate(wall, new Vector3((location.x - 0.5f) * scaling, 0, location.y * scaling), Quaternion.identity, wallParent);
+        go.GetComponent<Transform>().localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        go.GetComponent<Transform>().Rotate(0f, 90f, 0f);
     }
     void placeWallD(Vector2Int location, Vector2 size, Material material){
-        GameObject go = Instantiate(cubePrefab, new Vector3(location.x * scaling, 0, ((float)location.y + 0.9f) * scaling), Quaternion.identity, wallParent);
-        go.GetComponent<Transform>().localScale = new Vector3(size.x * scaling, scaling, size.y * scaling);
-        go.GetComponent<MeshRenderer>().material = material;
+        GameObject go = Instantiate(wall, new Vector3(location.x * scaling, 0, (location.y + 0.5f) * scaling), Quaternion.identity, wallParent);
+        go.GetComponent<Transform>().localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        go.GetComponent<Transform>().Rotate(0f, 180f, 0f);
     }
     void placeWallU(Vector2Int location, Vector2 size, Material material){
-        GameObject go = Instantiate(cubePrefab, new Vector3(location.x * scaling, 0, location.y * scaling), Quaternion.identity, wallParent);
-        go.GetComponent<Transform>().localScale = new Vector3(size.x * scaling, scaling, size.y * scaling);
-        go.GetComponent<MeshRenderer>().material = material;
+        GameObject go = Instantiate(wall, new Vector3(location.x * scaling, 0, (location.y - 0.5f) * scaling), Quaternion.identity, wallParent);
+        go.GetComponent<Transform>().localScale = new Vector3(2.5f, 2.5f, 2.5f);
     }
 
     //

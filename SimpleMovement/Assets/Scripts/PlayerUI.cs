@@ -7,7 +7,7 @@ using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
-    public PlayerController player;
+    public P_Controller player;
     public Slider hpSlider;
 
     public TextMeshProUGUI potion;
@@ -17,7 +17,7 @@ public class PlayerUI : MonoBehaviour
     
     private void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
+        player = GameObject.FindObjectOfType<P_Controller>();
     }
 
     private void Update()

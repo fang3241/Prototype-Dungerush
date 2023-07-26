@@ -23,9 +23,10 @@ public class SwordController : MonoBehaviour
      */
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Swooa");
         if(other != colliderSelf && other.CompareTag("Enemy"))
         {
-            int dmg = colliderSelf.GetComponent<PlayerController>().playerDamage;
+            int dmg = colliderSelf.GetComponent<P_Controller>().playerDamage;
             other.GetComponent<EnemyController>().Hit(dmg);//nanti bikin weapon stats buat masukkin damage nya, sementara 1 dulu
             Debug.Log("Enemy hit");
            
@@ -39,8 +40,8 @@ public class SwordController : MonoBehaviour
             if (!isAttackBounced)
             {
                 int dmg = colliderSelf.GetComponent<EnemyController>().damage;
-                other.GetComponent<PlayerController>().Hit(dmg);
-                Debug.Log("Player damaged " + colliderSelf.name);
+                other.GetComponent<P_Controller>().Hit(dmg);
+                Debug.Log("Player damaged by " + colliderSelf.name);
             }
             else
             {
@@ -51,6 +52,7 @@ public class SwordController : MonoBehaviour
                 EnemyCombat enemyCombat = transform.parent.parent.gameObject.GetComponent<EnemyCombat>();
                 enemyCombat.blocked = true;
                 //animasi enemy tsb gagal atk
+                //
             }
             
             
