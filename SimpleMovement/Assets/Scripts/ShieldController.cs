@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldController : MonoBehaviour
 {
-    public PlayerController player;
+    public Collider colliderSelf;
 
     public bool isHit;
 
@@ -15,8 +15,10 @@ public class ShieldController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag != "Player")//soalnya shieldnya nabrak
+        Debug.Log("colldi " + other.name);
+        if (colliderSelf != null && other != colliderSelf )//soalnya shieldnya nabrak
         {
+            Debug.Log("colldi no pleky");
             if (other.TryGetComponent<SwordController>(out SwordController sw))
             {
                 isHit = true;

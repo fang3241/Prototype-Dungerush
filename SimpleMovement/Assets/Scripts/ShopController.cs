@@ -21,18 +21,19 @@ public class ShopController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.levelController.shop = this;
         isShopOpened = false;
         //shopPanel.SetActive(isShopOpened);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            openShopMenu();
-        }
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.P))
+    //    {
+    //        openShopMenu();
+    //    }
+    //}
 
     public void openShopMenu()
     {
@@ -40,16 +41,20 @@ public class ShopController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            Time.timeScale = 0;
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            Time.timeScale = 1;
         }
         isShopOpened = !isShopOpened;
         updateShopPrice();
         shopPanel.SetActive(isShopOpened);
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isOnShop = isShopOpened;
+
+        GameManager.instance.levelController.player.GetComponent<P_Controller>().isOnShop = isShopOpened;
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isOnShop = isShopOpened;
     }
 
     public void updateShopPrice()
@@ -63,6 +68,8 @@ public class ShopController : MonoBehaviour
             Debug.Log("Lv " + (GameManager.instance.playerItemLevel[i] + 1));
             i++;
         }
+
+        itemLevels[2].text = GameManager.instance.playerItemLevel[2].ToString();
 
         i = 0;
         foreach (TextMeshProUGUI itemCost in itemCosts)

@@ -9,7 +9,8 @@ public class ButtonNav : MonoBehaviour
     {
         MainMenu,
         City,
-        Dungeon
+        Dungeon,
+        Shop
     }
 
     public void toMenu()

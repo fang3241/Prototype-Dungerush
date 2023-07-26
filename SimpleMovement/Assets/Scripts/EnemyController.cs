@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     public EnemyCombat enemyCombat;
     public GameObject player;
     public int hp;
+    public float speed; 
     public int damage;
     public float attInterval;
 
@@ -18,9 +19,11 @@ public class EnemyController : MonoBehaviour
 
     public int goldDrop;
 
+    //public Transform t;
+
     private void Start()
     {
-        player = GameManager.instance.levelController.player;
+        //player = GameManager.instance.levelController.player;
         isPlayerDetected = false;
     }
 
@@ -43,9 +46,27 @@ public class EnemyController : MonoBehaviour
     public void RotateTowardsPlayer()
     {
         //sementara gini, bisa diganti sekalian nggerakkin enemy nya
+
+        //player.transform.Find("MiddlePoint").TryGetComponent<Transform>(out t);
+        //Vector3 a = new Vector3(0, Mathf.Floor(player.transform.localScale.y / 2), 0);
+        //if (t != null)
+        //{
+        //    transform.LookAt(t);
+        //}
+        //else
+        //{
+
+        //    transform.LookAt(a);
+
+
+        //}
+
+        //Debug.Log(a);
+
+        //Debug.Log(player.transform.GetChild(0).name);
         transform.LookAt(player.transform);
-        
-      
+
+        //transform.position += transform.forward * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -77,8 +98,8 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator AttackTimer(float time)
     {
-        //yield return new WaitForSeconds(time);
-        yield return new WaitForSeconds(time);
+
         enemyCombat.Attack();
+        yield return new WaitForSeconds(time);
     }
 }

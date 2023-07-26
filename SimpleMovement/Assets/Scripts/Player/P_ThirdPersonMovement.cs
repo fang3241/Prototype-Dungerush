@@ -20,12 +20,13 @@ public class P_ThirdPersonMovement : MonoBehaviour
     Transform Chara;
 
     
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         anim = GetComponentInChildren<Animator>();
+
+        cam = Camera.main.transform;
     }
 
     private void Update()

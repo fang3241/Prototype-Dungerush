@@ -24,16 +24,7 @@ public class SwordController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Swooa");
-        if(other != colliderSelf && other.CompareTag("Enemy"))
-        {
-            int dmg = colliderSelf.GetComponent<P_Controller>().playerDamage;
-            other.GetComponent<EnemyController>().Hit(dmg);//nanti bikin weapon stats buat masukkin damage nya, sementara 1 dulu
-            Debug.Log("Enemy hit");
-           
-        }
         
-
-
         if (other != colliderSelf && other.CompareTag("Player"))
         {
             Debug.Log("Player Hit");
@@ -47,10 +38,15 @@ public class SwordController : MonoBehaviour
             {
                 Debug.Log("Player Shielded " + transform.parent.parent.gameObject);
                 isAttackBounced = false;
-                
+
                 //kasi tau ke enemy tsb bahwa keblock
-                EnemyCombat enemyCombat = transform.parent.parent.gameObject.GetComponent<EnemyCombat>();
+
+                //EnemyCombat enemyCombat = transform.parent.parent.gameObject.GetComponent<EnemyCombat>();
+                //enemyCombat.blocked = true;
+
+                EnemyCombat enemyCombat = colliderSelf.GetComponent<EnemyCombat>();
                 enemyCombat.blocked = true;
+
                 //animasi enemy tsb gagal atk
                 //
             }
