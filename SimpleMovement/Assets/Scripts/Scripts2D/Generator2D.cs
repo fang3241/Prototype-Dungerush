@@ -527,8 +527,8 @@ public class Generator2D : MonoBehaviour {
             //check if not null
             if(Generator2D.grid[tar] != CellType.None){
                 Debug.Log("spawn enemy at " + Generator2D.grid[tar]);
-                GameObject enem = Instantiate(enemy, new Vector3((tar.x + Random.Range(0.2f, 0.8f)) * scaling, 1.2f, (tar.y + Random.Range(0.2f, 0.8f)) * scaling), Quaternion.identity);
-                enem.GetComponent<Transform>().localScale = new Vector3(1.2f, 1.2f, 1.2f); 
+                GameObject enem = Instantiate(enemy, new Vector3((tar.x + Random.Range(0.3f, 0.7f)) * scaling, 1f, (tar.y + Random.Range(0.3f, 0.7f)) * scaling), Quaternion.identity);
+                enem.GetComponent<Transform>().localScale = new Vector3(1.5f, 1.5f, 1.5f); 
                 //enem.GetComponent<MeshRenderer>().material = purpleMaterial;
             }
             else{

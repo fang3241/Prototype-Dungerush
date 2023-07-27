@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -289,6 +289,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &205692336 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8126741049328155877, guid: e7585db447fe9fa44bbb00c960888f98, type: 3}
+  m_PrefabInstance: {fileID: 6037923597844003050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &258156892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362116912075483, guid: f72e3817526ea7240b22f39ae679b5f7, type: 3}
@@ -1010,6 +1015,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8186312969949991251, guid: 9c95b73731fcefe4aafb49022c1450ec, type: 3}
   m_PrefabInstance: {fileID: 687429809}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1430271569 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8186312969950153907, guid: 9c95b73731fcefe4aafb49022c1450ec, type: 3}
+  m_PrefabInstance: {fileID: 687429809}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1456670602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1160,6 +1170,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757cc767ec3bb0f4aac44a4e3dff701a, type: 3}
+--- !u!114 &1649846588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8126741049328378200, guid: e7585db447fe9fa44bbb00c960888f98, type: 3}
+  m_PrefabInstance: {fileID: 6037923597844003050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ad512095271bf4d9f83a24dec9df27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1800106817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1352,11 +1373,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2958929846131522444, guid: 5fe48076a4d32f84a8780f5d2bf055d2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2958929846131522444, guid: 5fe48076a4d32f84a8780f5d2bf055d2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4689244218006969158, guid: 5fe48076a4d32f84a8780f5d2bf055d2, type: 3}
       propertyPath: m_RootOrder
@@ -1409,6 +1430,10 @@ PrefabInstance:
     - target: {fileID: 4689244218006969162, guid: 5fe48076a4d32f84a8780f5d2bf055d2, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689244218006969162, guid: 5fe48076a4d32f84a8780f5d2bf055d2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4689244218006969163, guid: 5fe48076a4d32f84a8780f5d2bf055d2, type: 3}
       propertyPath: speed
@@ -1479,6 +1504,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8126741049328378180, guid: e7585db447fe9fa44bbb00c960888f98, type: 3}
+      propertyPath: headd
+      value: 
+      objectReference: {fileID: 205692336}
+    - target: {fileID: 8126741049328378180, guid: e7585db447fe9fa44bbb00c960888f98, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1430271569}
+    - target: {fileID: 8126741049328378180, guid: e7585db447fe9fa44bbb00c960888f98, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126741049328378180, guid: e7585db447fe9fa44bbb00c960888f98, type: 3}
+      propertyPath: enemycontroller
+      value: 
+      objectReference: {fileID: 1649846588}
     - target: {fileID: 8126741049328378183, guid: e7585db447fe9fa44bbb00c960888f98, type: 3}
       propertyPath: m_Name
       value: EnemyShieldWarrior 1

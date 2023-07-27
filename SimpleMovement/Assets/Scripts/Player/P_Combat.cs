@@ -52,7 +52,7 @@ public class P_Combat : MonoBehaviour
 
         Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (Input.GetMouseButtonDown(0) && !player.isOnShop){
+        if (Input.GetMouseButtonDown(0) && !player.isOnShop && isDef == 0){
             Debug.Log("Pressed left-click.");
 
             if (!isAttCD && !isShieldUp)

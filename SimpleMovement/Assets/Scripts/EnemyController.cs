@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         //player = GameManager.instance.levelController.player;
+        player = GameObject.Find("ShieldWarrior");
         isPlayerDetected = false;
     }
 
@@ -71,11 +72,12 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other == player.GetComponent<Collider>())
+    /*    if(other == player.GetComponent<Collider>())
         {
             isPlayerDetected = true;
             //Debug.Log(other);
         }
+        */
     }
 
     public void Hit(int dmg)
@@ -100,6 +102,6 @@ public class EnemyController : MonoBehaviour
     {
 
         enemyCombat.Attack();
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time + Random.Range(1f, 5f));
     }
 }

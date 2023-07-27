@@ -32,12 +32,12 @@ public class EnemyCombat : MonoBehaviour
     public IEnumerator combo1()
     {
         isAttack = true;
-        Debug.Log("atk1");
+        Debug.Log("enmu atk");
         
         
         //harusnya ngedit collidernya di animator, tapi karena takut rusak, jadi manual aja
-        yield return new WaitForSeconds(0.3f);//0.3
         anim.CrossFade("atk1", 0.15f);
+        yield return new WaitForSeconds(0.3f);//0.3
         Sword.GetComponent<BoxCollider>().enabled = true;
         yield return new WaitForSeconds(0.5f);
         Sword.GetComponent<BoxCollider>().enabled = false;
