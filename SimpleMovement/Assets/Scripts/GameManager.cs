@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
         potionCost = 60;
 
-        playerItemLevel = new int[3] { 1, 1, 0 };
+        playerItemLevel = new int[3] { 1, 1, 4 };
 
         money = 500;
     }

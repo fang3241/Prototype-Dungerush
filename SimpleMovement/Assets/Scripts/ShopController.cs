@@ -21,19 +21,18 @@ public class ShopController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.levelController.shop = this;
         isShopOpened = false;
         //shopPanel.SetActive(isShopOpened);
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.P))
-    //    {
-    //        openShopMenu();
-    //    }
-    //}
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            openShopMenu();
+        }
+    }
 
     public void openShopMenu()
     {
